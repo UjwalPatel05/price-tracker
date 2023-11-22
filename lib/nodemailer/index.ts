@@ -100,13 +100,8 @@ export async function sendEmail(emailContent: EmailContent, sendTo: string[]) {
     html: emailContent.body,
   };
  
-  transporter.sendMail(mailOptions, (error:any, info:any) => {
-    if (error) {
-      console.log(error);
-      return;
-    }
+  const data = await transporter.sendMail(mailOptions);
 
-    console.log("Email sent: " + info.response);
-  });
+  console.log(data);
 
 }
