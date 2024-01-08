@@ -7,6 +7,7 @@ import { scrapeAmazonProduct } from "../scraper";
 import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utils";
 import { generateEmailBody, sendEmail } from "../nodemailer";
 import { User } from "@/types";
+import { redirect } from "next/navigation";
 
 export async function scrapeAndStoreProduct(url: string) {
   if(!url) return;
@@ -39,15 +40,9 @@ export async function scrapeAndStoreProduct(url: string) {
 
     }
 
-    console.log("Product Before Saving",product);
-    
-
     const newProduct = await Product.findOneAndUpdate({productUrl:url},product,{new:true,upsert:true});
 
     revalidatePath(`/products/${newProduct._id}`);
-
-
-
 
 
   } catch (error: any) {
@@ -73,7 +68,7 @@ export async function getAllProducts() {
   try {
     await connectToDatabase();
 
-    const products = await Product.find({});
+    const products = await Product.find({}).limit(5).sort({createdAt:-1});
 
     return products;
   } catch (error: any) {
@@ -99,29 +94,6 @@ export async function getSimilarProducts(productId: string) {
     throw new Error(`failed to get products : ${error.message}`);
   }
 }
-
-// export async function addUserEmailToProduct(productId: string, email: string) {
-//   try {
-//     await connectToDatabase();
-
-//     const product = await Product.findById(productId);
-//     console.log(product);
-    
-//     if(!product) return;
-
-//     const existingUser = product.users.some((user:User )=> user.email === email);
-
-//     if(!existingUser) {
-//       product.users.push({email});
-//       await product.save();
-//       const emailContent = await generateEmailBody(product, "WELCOME");
-//       await sendEmail(emailContent, [email]);
-//     }
-
-//   } catch (error: any) {
-//     throw new Error(`failed to get products : ${error.message}`);
-//   }
-// }
 
 export async function addUserEmailToProduct(productId: string, userEmail: string) {
  
