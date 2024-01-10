@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Price Tracker : Full Stack Web Scraper
 
-First, run the development server:
+Price Tracker is a amazone product web scraping application that build with a Next.js 14 having features of data scraping, cron jobs, sending emails and more. 
+
+
+## Features
+
+- Scraping data from the Amazone site
+- Store into the MongoDB data base
+- cron jobs for automatically scraping data in fixed time interval
+- send email to user when any product data(Price, availability) updates
+
+
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/UjwalPatel05/price-tracker.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Setup .env file
+```bash
+BRIGHT_DATA_USERNAME =
+BRIGHT_DATA_PASSWORD = 
 
-## Learn More
+MONGODB_URI = 
 
-To learn more about Next.js, take a look at the following resources:
+EMAIL_SENDER = 
+EMAIL_PASSWORD = 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Start the server
 
-## Deploy on Vercel
+```bash
+  npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Screenshots
+
+Dashboard
+![Dashboard](https://res.cloudinary.com/djstjnl11/image/upload/v1704863495/vg4okpi1dxcigurw6ob7.png)
+
+Scraped Product
+![Scraped Product](https://res.cloudinary.com/djstjnl11/image/upload/v1704863495/vcdoollsfttoayfcu72i.png)
+
+Click on the Track button and provide email to track the product
+![Track Product](https://res.cloudinary.com/djstjnl11/image/upload/v1704863495/ntntwuohwjch16gxscvd.png)
+
+Sample Email when you Track Product
+![Sample Email](https://res.cloudinary.com/djstjnl11/image/upload/v1704863494/y0kjzj8x4lx6cckwlbkt.png)
+
+## Tech Stack
+
+**Client:** Next 14, React, TailwindCSS, TypeScript
+
+**Server:** Next JS, MongoDB
+
+**API:** BrightData (Open Source Scraper), Nodemailer
+
